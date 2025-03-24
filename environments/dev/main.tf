@@ -5,7 +5,8 @@ module "launch_template" {
   instance_type      = "t3.micro"
   key_name           = var.key_name
   security_group_ids = [module.sg.ec2_sg_id]
-  user_data          = file("user_data.sh")
+  user_data          = file("${path.module}/user_data.sh")
+  instance_profile_name = module.iam_role_ssm.instance_profile_name
   tags               = var.tags
 }
 
@@ -14,7 +15,7 @@ module "asg" {
   name                = "dev"
   launch_template_id  = module.launch_template.launch_template_id
   subnet_ids          = module.subnet.private_subnet_ids
-  target_group_arns   = []
+  target_group_arns   = [module.target_group.target_group_arn]
   desired_capacity    = 2
   min_size            = 1
   max_size            = 3
@@ -87,3 +88,7 @@ module "alb" {
 }
 
 
+module "iam_role_ssm" {
+  source = "../../modules/iam-role-ssm"
+  name   = "dev"
+}
