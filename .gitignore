@@ -1,0 +1,16 @@
+# Terraform files to ignore
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate
+*.tfstate.*
+crash.log
+*.log
+
+# VSCode
+.vscode/
+
+# 기타
+.DS_Store
+
+.terraform/
