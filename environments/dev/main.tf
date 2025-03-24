@@ -64,3 +64,26 @@ module "internet_gateway" {
   tags   = var.tags
 }
 
+module "target_group" {
+  source           = "../../modules/target-group"
+  name             = "dev"
+  port             = 80
+  protocol         = "HTTP"
+  vpc_id           = module.vpc.vpc_id
+  health_check_path = "/"
+  tags             = var.tags
+}
+
+module "alb" {
+  source = "../../modules/alb"
+
+  name                = "dev"
+  subnet_ids          = module.subnet.public_subnet_ids
+  security_group_ids  = [module.sg.ec2_sg_id]
+  listener_port       = 80
+  listener_protocol   = "HTTP"
+  target_group_arn    = module.target_group.target_group_arn
+  tags                = var.tags
+}
+
+
