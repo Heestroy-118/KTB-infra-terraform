@@ -22,12 +22,16 @@ jobs:
 
       - name: Terraform Init
         run: /usr/bin/terraform init
+        working-directory: environments/dev
 
       - name: Terraform Format
         run: /usr/bin/terraform fmt -check
+        working-directory: environments/dev
 
       - name: Terraform Validate
         run: /usr/bin/terraform validate
+        working-directory: environments/dev
 
       - name: Terraform Plan
         run: /usr/bin/terraform plan
+        working-directory: environments/dev
