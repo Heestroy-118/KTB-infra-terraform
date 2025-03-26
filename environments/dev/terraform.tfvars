@@ -8,3 +8,6 @@ tags = {
   Owner       = "moonjaehee"
   ManagedBy   = "Terraform"
 }
+
+db_username = "admin"
+db_password = "qwerasdf!"

@@ -17,3 +17,14 @@ variable "name" {
   description = "Resource name prefix"
   type        = string
 }
+
+variable "db_username" {
+  description = "RDS DB username"
+  type        = string
+}
+
+variable "db_password" {
+  description = "RDS DB password"
+  type        = string
+  sensitive   = true
+}

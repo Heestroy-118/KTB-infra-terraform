@@ -8,3 +8,13 @@ output "alb_arn" {
   value       = module.alb.alb_arn
 }
 
+output "rds_endpoint" {
+  description = "RDS endpoint"
+  value       = module.rds.rds_endpoint
+}
+
+output "rds_id" {
+  description = "RDS instance ID"
+  value       = module.rds.rds_id
+}
+
