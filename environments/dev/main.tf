@@ -1,6 +1,6 @@
 module "launch_template" {
   source                = "../../modules/launch-template"
-  name                  = "prod"
+  name                  = "dev"
   ami_id                = var.ami_id
   instance_type         = "t3.micro"
   key_name              = var.key_name
@@ -12,7 +12,7 @@ module "launch_template" {
 
 module "asg" {
   source             = "../../modules/asg"
-  name               = "prod"
+  name               = "dev"
   launch_template_id = module.launch_template.launch_template_id
   subnet_ids         = module.subnet.private_subnet_ids
   target_group_arns  = [module.target_group.target_group_arn]
@@ -24,7 +24,7 @@ module "asg" {
 
 module "sg" {
   source = "../../modules/sg"
-  name   = "prod"
+  name   = "dev"
   vpc_id = module.vpc.vpc_id
   tags   = var.tags
 }
@@ -32,7 +32,7 @@ module "sg" {
 module "subnet" {
   source               = "../../modules/subnet"
   vpc_id               = module.vpc.vpc_id
-  name                 = "prod"
+  name                 = "dev"
   public_subnet_cidrs  = ["10.0.0.0/26", "10.0.1.0/26"]
   private_subnet_cidrs = ["10.0.2.0/26", "10.0.3.0/26"]
   tags                 = var.tags
@@ -40,7 +40,7 @@ module "subnet" {
 
 module "vpc" {
   source     = "../../modules/vpc"
-  name       = "prod"
+  name       = "dev"
   cidr_block = "10.0.0.0/16"
   tags       = var.tags
 }
@@ -67,7 +67,7 @@ module "internet_gateway" {
 
 module "target_group" {
   source            = "../../modules/target-group"
-  name              ="prod"
+  name              ="dev"
   port              = 80
   protocol          = "HTTP"
   vpc_id            = module.vpc.vpc_id
@@ -78,7 +78,7 @@ module "target_group" {
 module "alb" {
   source = "../../modules/alb"
 
-  name               = "prod"
+  name               = "dev"
   subnet_ids         = module.subnet.public_subnet_ids
   security_group_ids = [module.sg.ec2_sg_id]
   listener_port      = 80
@@ -90,7 +90,7 @@ module "alb" {
 
 module "iam_role_ssm" {
   source = "../../modules/iam-role-ssm"
-  name   = "prod"
+  name   = "dev"
 }
 
 module "rds" {
