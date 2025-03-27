@@ -26,6 +26,10 @@ resource "aws_db_instance" "rds" {
   deletion_protection    = false
   multi_az               = false
 
+  backup_retention_period= 7
+  backup_window          = "04:00-05:00"
+  enabled_cloudwatch_logs_exports = ["error", "slowquery"]
+
    lifecycle {
     prevent_destroy = true
   }
