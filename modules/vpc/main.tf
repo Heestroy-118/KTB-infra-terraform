@@ -3,6 +3,10 @@ resource "aws_vpc" "this" {
   enable_dns_support   = true
   enable_dns_hostnames = true
 
+   lifecycle {
+    prevent_destroy = true
+  }
+
   tags = merge(
     var.tags,
     {

@@ -26,6 +26,10 @@ resource "aws_db_instance" "rds" {
   deletion_protection    = false
   multi_az               = false
 
+   lifecycle {
+    prevent_destroy = true
+  }
+
   tags = merge(
     var.tags,
     {
