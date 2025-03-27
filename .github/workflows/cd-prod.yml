@@ -1,0 +1,34 @@
+name: Terraform CD for Prod (Manual Approval)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-prod:
+    runs-on: self-hosted
+    environment:
+      name: production 
+
+    defaults:
+      run:
+        working-directory: environments/prod
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.6
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan -var="env=prod"
+
+      - name: Terraform Apply (Manual Approval)
+        run: terraform apply -auto-approve
