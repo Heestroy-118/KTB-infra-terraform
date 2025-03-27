@@ -28,7 +28,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan -var="env=prod"
+        run: terraform plan 
 
       - name: Terraform Apply (Manual Approval)
         run: terraform apply -auto-approve

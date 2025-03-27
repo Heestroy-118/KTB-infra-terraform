@@ -104,4 +104,3 @@ module "rds" {
   db_password        = "qwerasdf!"
   tags               = var.tags
 }
-
