@@ -33,8 +33,8 @@ module "subnet" {
   source               = "../../modules/subnet"
   vpc_id               = module.vpc.vpc_id
   name                 = var.name
-  public_subnet_cidrs  = ["10.1.0.0/26", "10.1.1.0/26"]       # 수정됨
-  private_subnet_cidrs = ["10.1.2.0/26", "10.1.3.0/26"]       # 수정됨
+  public_subnet_cidrs  = ["10.1.0.0/26", "10.1.1.0/26"] # 수정됨
+  private_subnet_cidrs = ["10.1.2.0/26", "10.1.3.0/26"] # 수정됨
   tags                 = var.tags
 }
 
@@ -67,7 +67,7 @@ module "internet_gateway" {
 
 module "target_group" {
   source            = "../../modules/target-group"
-  name              =var.name
+  name              = var.name
   port              = 80
   protocol          = "HTTP"
   vpc_id            = module.vpc.vpc_id
@@ -94,14 +94,14 @@ module "iam_role_ssm" {
 }
 
 module "rds" {
-  source              = "../../modules/rds"
-  name                = "prod-rds"  # dev-rds가 아님
-  subnet_ids          = module.subnet.private_subnet_ids
-  security_group_ids  = [module.sg.ec2_sg_id]
-  instance_class      = "db.t3.micro"
-  allocated_storage   = 20
-  db_username         = "admin"
-  db_password         = "qwerasdf!"
-  tags                = var.tags
+  source             = "../../modules/rds"
+  name               = "prod-rds" # dev-rds가 아님
+  subnet_ids         = module.subnet.private_subnet_ids
+  security_group_ids = [module.sg.ec2_sg_id]
+  instance_class     = "db.t3.micro"
+  allocated_storage  = 20
+  db_username        = "admin"
+  db_password        = "qwerasdf!"
+  tags               = var.tags
 }
 

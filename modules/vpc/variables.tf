@@ -13,7 +13,7 @@ variable "tags" {
   type        = map(string)
   default = {
     Project     = "personal-cloud"
-    Environment = "dev"             
+    Environment = "dev"
     Owner       = "moonjaehee"
     ManagedBy   = "Terraform"
   }

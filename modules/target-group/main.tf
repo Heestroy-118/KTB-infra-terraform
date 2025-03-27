@@ -1,8 +1,8 @@
 resource "aws_lb_target_group" "this" {
-  name     = "${var.name}-tg"
-  port     = var.port
-  protocol = var.protocol
-  vpc_id   = var.vpc_id
+  name        = "${var.name}-tg"
+  port        = var.port
+  protocol    = var.protocol
+  vpc_id      = var.vpc_id
   target_type = var.target_type
 
   health_check {

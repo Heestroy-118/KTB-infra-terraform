@@ -67,7 +67,7 @@ module "internet_gateway" {
 
 module "target_group" {
   source            = "../../modules/target-group"
-  name              ="dev"
+  name              = "dev"
   port              = 80
   protocol          = "HTTP"
   vpc_id            = module.vpc.vpc_id
@@ -94,13 +94,13 @@ module "iam_role_ssm" {
 }
 
 module "rds" {
-  source              = "../../modules/rds"
-  name                = var.name
-  subnet_ids          = module.subnet.private_subnet_ids
-  security_group_ids  = [module.sg.ec2_sg_id] # SG 공유한다면 OK
-  instance_class      = "db.t3.micro"
-  allocated_storage   = 20
-  db_username         = "admin"
-  db_password         = "qwerasdf!"
-  tags                = var.tags
+  source             = "../../modules/rds"
+  name               = var.name
+  subnet_ids         = module.subnet.private_subnet_ids
+  security_group_ids = [module.sg.ec2_sg_id] # SG 공유한다면 OK
+  instance_class     = "db.t3.micro"
+  allocated_storage  = 20
+  db_username        = "admin"
+  db_password        = "qwerasdf!"
+  tags               = var.tags
 }
