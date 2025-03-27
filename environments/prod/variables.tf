@@ -28,3 +28,13 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "instance_class" {
+  description = "RDS DB instance class"
+  type        = string
+}
+
+variable "allocated_storage" {
+  description = "RDS allocated storage in GB"
+  type        = number
+}

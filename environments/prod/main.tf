@@ -33,15 +33,15 @@ module "subnet" {
   source               = "../../modules/subnet"
   vpc_id               = module.vpc.vpc_id
   name                 = var.name
-  public_subnet_cidrs  = ["10.0.0.0/26", "10.0.1.0/26"]
-  private_subnet_cidrs = ["10.0.2.0/26", "10.0.3.0/26"]
+  public_subnet_cidrs  = ["10.1.0.0/26", "10.1.1.0/26"]       # 수정됨
+  private_subnet_cidrs = ["10.1.2.0/26", "10.1.3.0/26"]       # 수정됨
   tags                 = var.tags
 }
 
 module "vpc" {
   source     = "../../modules/vpc"
   name       = var.name
-  cidr_block = "10.0.0.0/16"
+  cidr_block = "10.1.0.0/16"
   tags       = var.tags
 }
 
@@ -95,12 +95,13 @@ module "iam_role_ssm" {
 
 module "rds" {
   source              = "../../modules/rds"
-  name                = var.name
+  name                = "prod-rds"  # dev-rds가 아님
   subnet_ids          = module.subnet.private_subnet_ids
-  security_group_ids  = [module.sg.ec2_sg_id] # SG 공유한다면 OK
+  security_group_ids  = [module.sg.ec2_sg_id]
   instance_class      = "db.t3.micro"
   allocated_storage   = 20
   db_username         = "admin"
   db_password         = "qwerasdf!"
   tags                = var.tags
 }
+

@@ -17,4 +17,3 @@ output "rds_id" {
   description = "RDS instance ID"
   value       = module.rds.rds_id
 }
-
